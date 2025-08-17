@@ -4,15 +4,19 @@ int commentLines = 0;
 %}
 
 %%
-"//".*               { commentLines++; } // single-line comment
-"/\\*([^*]*\\*+([^/*][^*]*\\*+)*)/" {
-    // multi-line comment
-    for(int i=0; yytext[i]; i++)
-        if(yytext[i]=='\n') commentLines++;
-    commentLines++; // count the first line
-}
-[ \t\n]+             ;   // whitespace ignore
-.                    ;   // ignore other characters
+"//".*              { commentLines++; }
+"/*"                { 
+                      int c;
+                      commentLines++; 
+                      while((c = input()) != 0) {
+                        if(c == '\n') commentLines++;
+                        if(c == '*') {
+                          if((c = input()) == '/') break;
+                          else unput(c);
+                        }
+                      }
+                    }
+.|\n                {/*ignore*/}
 %%
 
 int main() {
@@ -22,6 +26,6 @@ int main() {
     return 0;
 }
 
-int yywrap(void) {
+int yywrap() {
     return 1;
 }

@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 5
-#define YY_END_OF_BUFFER 6
+#define YY_NUM_RULES 4
+#define YY_END_OF_BUFFER 5
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -360,20 +360,19 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[12] =
+static const flex_int16_t yy_accept[10] =
     {   0,
-        0,    0,    6,    4,    3,    3,    2,    1,    3,    1,
-        0
+        0,    0,    5,    3,    3,    2,    1,    1,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
     {   0,
-        1,    1,    1,    1,    1,    1,    1,    1,    2,    3,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    2,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    4,    4,    1,    4,    1,    4,    5,    5,    5,
-        5,    5,    5,    5,    5,    5,    5,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    3,    1,    1,    1,    1,    4,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -398,33 +397,31 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[6] =
+static const YY_CHAR yy_meta[5] =
     {   0,
-        1,    2,    2,    1,    3
+        1,    2,    1,    1
     } ;
 
-static const flex_int16_t yy_base[14] =
+static const flex_int16_t yy_base[11] =
     {   0,
-        0,    0,    8,    9,    0,    0,    9,    0,    0,    0,
-        9,    5,    3
+        0,    0,    8,    9,    2,    9,    0,    0,    9,    6
     } ;
 
-static const flex_int16_t yy_def[14] =
+static const flex_int16_t yy_def[11] =
     {   0,
-       11,    1,   11,   11,   12,   12,   11,   13,   12,   13,
-        0,   11,   11
+        9,    1,    9,    9,    9,    9,   10,   10,    0,    9
     } ;
 
-static const flex_int16_t yy_nxt[15] =
+static const flex_int16_t yy_nxt[14] =
     {   0,
-        4,    5,    6,    7,    8,   10,    9,   11,    3,   11,
-       11,   11,   11,   11
+        4,    4,    4,    5,    6,    7,    8,    9,    3,    9,
+        9,    9,    9
     } ;
 
-static const flex_int16_t yy_chk[15] =
+static const flex_int16_t yy_chk[14] =
     {   0,
-        1,    1,    1,    1,    1,   13,   12,    3,   11,   11,
-       11,   11,   11,   11
+        1,    1,    1,    1,    5,    5,   10,    3,    9,    9,
+        9,    9,    9
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -441,13 +438,12 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "08_simple_calculator.l"
-#line 2 "08_simple_calculator.l"
+#line 1 "06_count_comments.l"
+#line 2 "06_count_comments.l"
 #include <stdio.h>
-int num1, num2;
-char op;
-#line 450 "lex.yy.c"
-#line 451 "lex.yy.c"
+int commentLines = 0;
+#line 446 "lex.yy.c"
+#line 447 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -664,9 +660,9 @@ YY_DECL
 		}
 
 	{
-#line 7 "08_simple_calculator.l"
+#line 6 "06_count_comments.l"
 
-#line 670 "lex.yy.c"
+#line 666 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -693,7 +689,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 12 )
+				if ( yy_current_state >= 10 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -725,31 +721,36 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 8 "08_simple_calculator.l"
-{ if(num1==0) num1 = atoi(yytext); else num2 = atoi(yytext); }
+#line 7 "06_count_comments.l"
+{ commentLines++; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 9 "08_simple_calculator.l"
-{ op = yytext[0]; }
+#line 8 "06_count_comments.l"
+{ 
+                      int c;
+                      commentLines++; 
+                      while((c = input()) != 0) {
+                        if(c == '\n') commentLines++;
+                        if(c == '*') {
+                          if((c = input()) == '/') break;
+                          else unput(c);
+                        }
+                      }
+                    }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 10 "08_simple_calculator.l"
-;   // ignore whitespace
+#line 19 "06_count_comments.l"
+;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 11 "08_simple_calculator.l"
-{ printf("Unknown character: %s\n", yytext); }
-	YY_BREAK
-case 5:
-YY_RULE_SETUP
-#line 12 "08_simple_calculator.l"
+#line 20 "06_count_comments.l"
 ECHO;
 	YY_BREAK
-#line 753 "lex.yy.c"
+#line 754 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1046,7 +1047,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 12 )
+			if ( yy_current_state >= 10 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1074,11 +1075,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 12 )
+		if ( yy_current_state >= 10 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 11);
+	yy_is_jam = (yy_current_state == 9);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1754,25 +1755,16 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 12 "08_simple_calculator.l"
+#line 20 "06_count_comments.l"
 
 
 int main() {
-    printf("Enter expression (e.g., 12 + 5): ");
+    printf("Enter C program (Ctrl+D to end input):\n");
     yylex();
-
-    switch(op){
-        case '+': printf("Result: %d\n", num1+num2); break;
-        case '-': printf("Result: %d\n", num1-num2); break;
-        case '*': printf("Result: %d\n", num1*num2); break;
-        case '/': if(num2!=0) printf("Result: %d\n", num1/num2); 
-                  else printf("Division by zero error\n"); 
-                  break;
-        default: printf("Invalid operator\n");
-    }
-
+    printf("Total Comment Lines: %d\n", commentLines);
     return 0;
 }
 
-int yywrap(){ return 1; }
-
+int yywrap() {
+    return 1;
+}

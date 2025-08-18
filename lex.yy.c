@@ -360,9 +360,10 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[10] =
+static const flex_int16_t yy_accept[13] =
     {   0,
-        0,    0,    5,    3,    3,    2,    1,    1,    0
+        0,    0,    5,    3,    3,    0,    1,    0,    0,    1,
+        2,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -402,26 +403,28 @@ static const YY_CHAR yy_meta[5] =
         1,    2,    1,    1
     } ;
 
-static const flex_int16_t yy_base[11] =
+static const flex_int16_t yy_base[15] =
     {   0,
-        0,    0,    8,    9,    2,    9,    0,    0,    9,    6
+        0,    0,   13,   14,    2,    9,    0,    8,    6,    0,
+       14,   14,    6,    8
     } ;
 
-static const flex_int16_t yy_def[11] =
+static const flex_int16_t yy_def[15] =
     {   0,
-        9,    1,    9,    9,    9,    9,   10,   10,    0,    9
+       12,    1,   12,   12,   12,   13,   14,   13,    8,   14,
+       12,    0,   12,   12
     } ;
 
-static const flex_int16_t yy_nxt[14] =
+static const flex_int16_t yy_nxt[19] =
     {   0,
-        4,    4,    4,    5,    6,    7,    8,    9,    3,    9,
-        9,    9,    9
+        4,    4,    4,    5,    6,    7,    8,    8,   10,   11,
+        9,    9,   12,    3,   12,   12,   12,   12
     } ;
 
-static const flex_int16_t yy_chk[14] =
+static const flex_int16_t yy_chk[19] =
     {   0,
-        1,    1,    1,    1,    5,    5,   10,    3,    9,    9,
-        9,    9,    9
+        1,    1,    1,    1,    5,    5,   13,   13,   14,    9,
+        8,    6,    3,   12,   12,   12,   12,   12
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -438,12 +441,12 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "06_count_comments.l"
-#line 2 "06_count_comments.l"
-#include <stdio.h>
-int commentLines = 0;
-#line 446 "lex.yy.c"
-#line 447 "lex.yy.c"
+#line 1 "0tamim.l"
+#line 2 "0tamim.l"
+int single_comment_count = 0;
+int multi_comment_count = 0;
+#line 449 "lex.yy.c"
+#line 450 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -660,9 +663,10 @@ YY_DECL
 		}
 
 	{
-#line 6 "06_count_comments.l"
+#line 6 "0tamim.l"
 
-#line 666 "lex.yy.c"
+
+#line 670 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -689,13 +693,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 10 )
+				if ( yy_current_state >= 13 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 9 );
+		while ( yy_base[yy_current_state] != 14 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -721,36 +725,27 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 7 "06_count_comments.l"
-{ commentLines++; }
+#line 8 "0tamim.l"
+{ single_comment_count++; }
 	YY_BREAK
 case 2:
+/* rule 2 can match eol */
 YY_RULE_SETUP
-#line 8 "06_count_comments.l"
-{ 
-                      int c;
-                      commentLines++; 
-                      while((c = input()) != 0) {
-                        if(c == '\n') commentLines++;
-                        if(c == '*') {
-                          if((c = input()) == '/') break;
-                          else unput(c);
-                        }
-                      }
-                    }
+#line 9 "0tamim.l"
+{ multi_comment_count++; }
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 19 "06_count_comments.l"
-;
+#line 11 "0tamim.l"
+{ /* Ignore other characters */ }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "06_count_comments.l"
+#line 13 "0tamim.l"
 ECHO;
 	YY_BREAK
-#line 754 "lex.yy.c"
+#line 749 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1047,7 +1042,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 10 )
+			if ( yy_current_state >= 13 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1075,11 +1070,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 10 )
+		if ( yy_current_state >= 13 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 9);
+	yy_is_jam = (yy_current_state == 12);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1755,16 +1750,17 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 20 "06_count_comments.l"
+#line 13 "0tamim.l"
 
 
-int main() {
-    printf("Enter C program (Ctrl+D to end input):\n");
+int main(void) {
     yylex();
-    printf("Total Comment Lines: %d\n", commentLines);
+    printf("Single-line comments: %d\n", single_comment_count);
+    printf("Multi-line comments: %d\n", multi_comment_count);
     return 0;
 }
 
-int yywrap() {
+int yywrap(){
     return 1;
+
 }

@@ -13,6 +13,7 @@ int multi_comment_count = 0;
 %%
 
 int main(void) {
+    printf("Enter the Comments :");
     yylex();
     printf("Single-line comments: %d\n", single_comment_count);
     printf("Multi-line comments: %d\n", multi_comment_count);
